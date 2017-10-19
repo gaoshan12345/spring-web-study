@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -26,32 +25,3 @@
 		</property>
 	</bean>
 </beans>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-	<!-- 默认的注解映射的支持 --> 
-	<context:component-scan base-package="**.**.controller"/>
-	 
-	<mvc:annotation-driven>
-		<mvc:message-converters>
-			<ref bean="fastJsonHttpMessageConverter" />
-		</mvc:message-converters>
-	</mvc:annotation-driven>
-	<mvc:default-servlet-handler />
-	<!-- 处理JSON数据转换的 -->
-	<bean id="fastJsonHttpMessageConverter"
-		class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
-		<!-- 为了处理返回的JSON数据的编码，默认是ISO-88859-1的，这里把它设置为utf-8,解决有乱码的情况 -->
-		<property name="supportedMediaTypes">
-			<list>
-				<value>application/json;charset=utf-8</value>
-			</list>
-		</property>
-	</bean>
-</beans>
->>>>>>> cd25a129ac6e9d3b2982c803a677aa7618e4c08a
