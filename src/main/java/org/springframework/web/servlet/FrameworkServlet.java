@@ -460,6 +460,7 @@ public abstract class FrameworkServlet extends HttpServletBean {
 		//这里初始化上下文
 		try {
 			this.webApplicationContext = initWebApplicationContext();
+			//这是个空方法
 			initFrameworkServlet();
 		}
 		catch (ServletException ex) {
@@ -487,7 +488,7 @@ public abstract class FrameworkServlet extends HttpServletBean {
 	 * @see #setContextConfigLocation
 	 */
 	protected WebApplicationContext initWebApplicationContext() {
-		//取得跟上下文
+		//取得根上下文
 		WebApplicationContext rootContext = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		WebApplicationContext wac = null;
 
@@ -644,6 +645,7 @@ public abstract class FrameworkServlet extends HttpServletBean {
 
 		postProcessWebApplicationContext(wac);
 		applyInitializers(wac);
+		//最终可能调用AbstractApplicationContext类的refresh()方法
 		wac.refresh();
 	}
 

@@ -1438,6 +1438,7 @@ public class BeanDefinitionParserDelegate {
 	}
 
 	public BeanDefinition parseCustomElement(Element ele, BeanDefinition containingBd) {
+		logger.info("parseCustomElement = " + DefaultBeanDefinitionDocumentReader.nodeToString(ele));
 		String namespaceUri = getNamespaceURI(ele);
 		logger.info("parseCustomElement namespaceUri = " + namespaceUri);
 		NamespaceHandler handler = this.readerContext.getNamespaceHandlerResolver().resolve(namespaceUri);

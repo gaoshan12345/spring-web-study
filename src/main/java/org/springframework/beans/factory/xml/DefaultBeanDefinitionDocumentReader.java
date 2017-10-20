@@ -188,16 +188,17 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	protected void parseBeanDefinitions(Element root, BeanDefinitionParserDelegate delegate) {
 		//对beans处理
 		if (delegate.isDefaultNamespace(root)) {
-			//logger.info("root nodeToString(root) = " + nodeToString(root));
+			logger.info("root nodeToString() = " + nodeToString(root));
 			//System.out.println("root.getNodeName() = " + root.getNodeName());
 			//System.out.println("root.nodeToString() = " + nodeToString(root));
 			NodeList nl = root.getChildNodes();
 			//System.out.println("nl.getLength() = " + nl.getLength());
 			for (int i = 0; i < nl.getLength(); i++) {
 				Node node = nl.item(i);
-				//System.out.println("node.nodeToString() = " + nodeToString(node));
+				logger.info("node.nodeToString() = " + nodeToString(node));
 				if (node instanceof Element) {
 					Element ele = (Element) node;
+					logger.info("parseBeanDefinitions ele getNamespaceURI = " + delegate.getNamespaceURI(ele));
 					//BEANS_NAMESPACE_URI = "http://www.springframework.org/schema/beans";
 					if (delegate.isDefaultNamespace(ele)) {
 						//对bean处理，对import、alias、bean和beans标签处理
@@ -248,6 +249,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	}  
 
 	private void parseDefaultElement(Element ele, BeanDefinitionParserDelegate delegate) {
+		logger.info("parseDefaultElement = " + nodeToString(ele));
 		if (delegate.nodeNameEquals(ele, IMPORT_ELEMENT)) {
 			importBeanDefinitionResource(ele);
 		}

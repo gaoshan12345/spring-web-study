@@ -543,6 +543,10 @@ public class DispatcherServlet extends FrameworkServlet {
 	private void initHandlerMappings(ApplicationContext context) {
 		this.handlerMappings = null;
 
+		/**
+		 *这里导入所有的HandlerMapping Bean，这些Bean可以在当前的DispatcherServlet的IoC容器中，也可能在其双亲上下文中。
+		 */
+		//这个detectAllHandlerMappings默认值是true，即默认地从所有的IoC容器中取
 		if (this.detectAllHandlerMappings) {
 			// Find all HandlerMappings in the ApplicationContext, including ancestor contexts.
 			Map<String, HandlerMapping> matchingBeans = BeanFactoryUtils.beansOfTypeIncludingAncestors(context, HandlerMapping.class, true, false);

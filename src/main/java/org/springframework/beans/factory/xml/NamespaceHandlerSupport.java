@@ -22,7 +22,8 @@ import java.util.Map;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 
@@ -43,6 +44,8 @@ import org.springframework.beans.factory.config.BeanDefinitionHolder;
  */
 public abstract class NamespaceHandlerSupport implements NamespaceHandler {
 
+	protected final Log logger = LogFactory.getLog(NamespaceHandlerSupport.class);
+	
 	/**
 	 * Stores the {@link BeanDefinitionParser} implementations keyed by the
 	 * local name of the {@link Element Elements} they handle.
@@ -88,6 +91,7 @@ public abstract class NamespaceHandlerSupport implements NamespaceHandler {
 	private BeanDefinitionParser findParserForElement(Element element, ParserContext parserContext) {
 		String localName = parserContext.getDelegate().getLocalName(element);
 		BeanDefinitionParser parser = this.parsers.get(localName);
+		logger.info("this.parsers = " + this.parsers);
 		if (parser == null) {
 			parserContext.getReaderContext().fatal(
 					"Cannot locate BeanDefinitionParser for element [" + localName + "]", element);
