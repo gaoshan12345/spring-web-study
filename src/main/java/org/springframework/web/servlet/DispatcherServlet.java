@@ -580,6 +580,11 @@ public class DispatcherServlet extends FrameworkServlet {
 				logger.debug("No HandlerMappings found in servlet '" + getServletName() + "': using default");
 			}
 		}
+		
+		logger.info("initHandlerMappings handlerMappings = " + this.handlerMappings);
+		for(int i = 0; i < this.handlerMappings.size();i++){
+			logger.info("initHandlerMappings handlerMappings = " + this.handlerMappings.get(i).getClass());	
+		}
 	}
 
 	/**
@@ -1111,9 +1116,16 @@ public class DispatcherServlet extends FrameworkServlet {
 	 * @return the HandlerExecutionChain, or {@code null} if no handler could be found
 	 */
 	protected HandlerExecutionChain getHandler(HttpServletRequest request) throws Exception {
+//		for (HandlerMapping hm : this.handlerMappings) {
+//			logger.info("getHandler hm " + hm.getClass() + ",hm.getHandler(request)" + hm.getHandler(request));
+//		}
+		
 		for (HandlerMapping hm : this.handlerMappings) {
-			logger.info("getHandler hm " + hm.getClass() + ",hm.getHandler(request)" + hm.getHandler(request));
+			HandlerExecutionChain handler = hm.getHandler(request);
+			logger.info("hm" + hm.getClass() + ",get getHandler = " + handler);
 		}
+		
+		
 		
 		for (HandlerMapping hm : this.handlerMappings) {
 			if (logger.isTraceEnabled()) {
@@ -1124,6 +1136,7 @@ public class DispatcherServlet extends FrameworkServlet {
 				return handler;
 			}
 		}
+		
 		return null;
 	}
 

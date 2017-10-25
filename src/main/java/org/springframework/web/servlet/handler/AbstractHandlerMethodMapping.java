@@ -99,11 +99,13 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 			logger.debug("Looking for request mappings in application context: " + getApplicationContext());
 		}
 
+		//getApplicationContext().getBeanNamesForType(Object.class)是列出所有的已注册的bean
 		String[] beanNames = (this.detectHandlerMethodsInAncestorContexts ?
 				BeanFactoryUtils.beanNamesForTypeIncludingAncestors(getApplicationContext(), Object.class) :
 				getApplicationContext().getBeanNamesForType(Object.class));
 
 		for (String beanName : beanNames) {
+			//调用RequestMappingHandlerMapping的isHandler方法
 			if (isHandler(getApplicationContext().getType(beanName))){
 				detectHandlerMethods(beanName);
 			}
